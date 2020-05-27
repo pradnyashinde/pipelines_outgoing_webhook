@@ -37,7 +37,7 @@ pipelines:
           dockerImageName: 34.77.95.84:8082/docker-local/alpine37  # replace with the image name you want
           dockerImageTag: “{{gitBranch}}-${run_number}”
           inputResources:
-            - name: example_dbp_repo
+            - name: gitrepo_outgoingwebhook
           integrations:
             - name: ArtifactoryIntegration # replace with your Artifactory integration
 
