@@ -27,7 +27,7 @@ resources:
         #accept: xyc
 
 pipelines:
-  - name: example_docker_build_push_pipeline
+  - name: outgoing_webhook_pipeline
     steps:
       - name: docker_build
         type: DockerBuild
