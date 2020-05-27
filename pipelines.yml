@@ -55,4 +55,10 @@ pipelines:
             - name: PradnyaOutgoingWebhook
         execution:
           onSuccess:
-            - set_payload PradnyaOutgoingWebhook "{\"imageName\":\"$res_MagentoImage_imageName\", \"imageTag\":\"$res_MagentoImage_imageTag\"}"
+            #- set_payload PradnyaOutgoingWebhook "{\"imageName\":\"$res_MagentoImage_imageName\", \"imageTag\":\"$res_MagentoImage_imageTag\"}"
+            - set_payload PradnyaOutgoingWebhook "{\"imageName\":\"MagentoImageName\", \"imageTag\":\"MagentoImageTag\"}"
+            
+            
+            
+            
+            
