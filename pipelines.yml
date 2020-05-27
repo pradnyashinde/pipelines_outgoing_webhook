@@ -35,7 +35,7 @@ pipelines:
           dockerFileLocation: .
           dockerFileName: Dockerfile
           dockerImageName: 34.77.95.84:8082/docker-local/alpine37  # replace with the image name you want
-          dockerImageTag: “{{gitBranch}}-${run_number}”
+          dockerImageTag: ${run_number} #“{{gitBranch}}-${run_number}”
           inputResources:
             - name: gitrepo_outgoingwebhook
           integrations:
