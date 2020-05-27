@@ -5,7 +5,7 @@ resources:
       gitProvider: pradnyashinde   # replace with your integration
       path: pradnyashinde/pipelines_outgoing_webhook    # replace with your repository name
       branches:
-        include: master
+        include: {{gitBranch}}
 
   - name: MagentoImage
     type: Image
@@ -35,7 +35,7 @@ pipelines:
           dockerFileLocation: .
           dockerFileName: Dockerfile
           dockerImageName: 34.77.95.84:8082/docker-local/alpine37  # replace with the image name you want
-          dockerImageTag: ${run_number}
+          dockerImageTag: “{{gitBranch}}-${run_number}”
           inputResources:
             - name: example_dbp_repo
           integrations:
