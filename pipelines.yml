@@ -1,5 +1,5 @@
 resources:
-  - name: example_dbp_repo
+  - name: gitrepo_outgoingwebhook
     type: GitRepo
     configuration:
       gitProvider: pradnyashinde   # replace with your integration
