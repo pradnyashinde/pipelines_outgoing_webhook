@@ -45,7 +45,7 @@ pipelines:
         type: DockerPush
         configuration:
           targetRepository: docker-local  # replace if needed
-          autoPublishBuildInfo: true
+          autoPublishBuildInfo: false
           integrations:
             - name: ArtifactoryIntegration # replace with your Artifactory integration
           inputSteps:
