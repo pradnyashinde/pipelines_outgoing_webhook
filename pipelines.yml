@@ -1,0 +1,58 @@
+resources:
+  - name: example_dbp_repo
+    type: GitRepo
+    configuration:
+      gitProvider: pradnyashinde   # replace with your integration
+      path: pradnyashinde/pipelines_outgoing_webhook    # replace with your repository name
+      branches:
+        include: master
+
+  - name: MagentoImage
+    type: Image
+    configuration:
+      registry: ArtifactoryIntegration
+      sourceRepository: docker-local
+      imageName: 34.77.95.84:8082/docker-local/alpine37
+      imageTag: latest
+
+  - name: PradnyaOutgoingWebhook
+    type: OutgoingWebhook
+    configuration:
+      webhookName: PipelinesOutgoingWebhook                           # name of an Outgoing Webhook Integration
+      method: POST             # default POST
+      #Parameters: <string>                            # query string to be appended to the outgoing URL
+      #path:       <string>
+      #headers:
+        #Content-type: <valid request content types>
+        #accept: xyc
+
+pipelines:
+  - name: example_docker_build_push_pipeline
+    steps:
+      - name: docker_build
+        type: DockerBuild
+        configuration:
+          dockerFileLocation: .
+          dockerFileName: Dockerfile
+          dockerImageName: 34.77.95.84:8082/docker-local/alpine37  # replace with the image name you want
+          dockerImageTag: ${run_number}
+          inputResources:
+            - name: example_dbp_repo
+          integrations:
+            - name: ArtifactoryIntegration # replace with your Artifactory integration
+
+      - name: docker_push
+        type: DockerPush
+        configuration:
+          targetRepository: docker-local  # replace if needed
+          autoPublishBuildInfo: true
+          integrations:
+            - name: ArtifactoryIntegration # replace with your Artifactory integration
+          inputSteps:
+            - name: docker_build
+          outputResources:
+            - name: MagentoImage
+            - name: PradnyaOutgoingWebhook
+        execution:
+          onSuccess:
+            - set_payload PradnyaOutgoingWebhook "{\"imageName\":\"$res_MagentoImage_imageName\", \"imageTag\":\"$res_MagentoImage_imageTag\"}"
