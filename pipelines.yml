@@ -45,7 +45,7 @@ pipelines:
         type: DockerPush
         configuration:
           environmentVariables: 
-            pradnyas_outhook_payload_file: "${step_tmp_dir}/payload.json"
+            PradnyaOutgoingWebhook_payload_file: "${step_tmp_dir}/payload.json"
           targetRepository: docker-local  # replace if needed
           autoPublishBuildInfo: false
           integrations:
@@ -59,8 +59,8 @@ pipelines:
           onSuccess:
             #- set_payload PradnyaOutgoingWebhook "{\"imageName\":\"$res_MagentoImage_imageName\", \"imageTag\":\"$res_MagentoImage_imageTag\"}"
             #- set_payload PradnyaOutgoingWebhook "{\"imageName\":\"MagentoImageName\", \"imageTag\":\"MagentoImageTag\"}"
-            - echo "{\"imageName\":\"34.77.80.80:8082/docker-local/alpine37\",\"imageTag\":\"{{gitBranch}}-${run_number}\"}" > $pradnyas_outhook_payload_file
-            - set_payload PradnyaOutgoingWebhook $pradnyas_outhook_payload_file --file
+            - echo "{\"imageName\":\"34.77.80.80:8082/docker-local/alpine37\",\"imageTag\":\"{{gitBranch}}-${run_number}\"}" > $PradnyaOutgoingWebhook_payload_file
+            - set_payload PradnyaOutgoingWebhook $PradnyaOutgoingWebhook_payload_file --file
 
             
             
