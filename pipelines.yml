@@ -56,13 +56,10 @@ pipelines:
             - name: MagentoImage
             - name: PradnyaOutgoingWebhook
         execution:
-          onExecute: 
-            - export imageName="testImageName"
-            - export imageTag="testImageTag"
           onSuccess:
             #- set_payload PradnyaOutgoingWebhook "{\"imageName\":\"$res_MagentoImage_imageName\", \"imageTag\":\"$res_MagentoImage_imageTag\"}"
             #- set_payload PradnyaOutgoingWebhook "{\"imageName\":\"MagentoImageName\", \"imageTag\":\"MagentoImageTag\"}"
-            - echo "{\"imageName\":\"$imageName\",\"imageTag\":\"$imageTag\"}" > $pradnyas_outhook_payload_file
+            - echo "{\"imageName\":\"34.77.80.80:8082/docker-local/alpine37\",\"imageTag\":\"{{gitBranch}}-${run_number}\"}" > $pradnyas_outhook_payload_file
             - set_payload PradnyaOutgoingWebhook $pradnyas_outhook_payload_file --file
 
             
