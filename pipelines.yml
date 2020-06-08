@@ -12,7 +12,7 @@ resources:
     configuration:
       registry: ArtifactoryIntegration
       sourceRepository: docker-local
-      imageName: 34.77.95.84:8082/docker-local/alpine37
+      imageName: 34.80.90.69:8082/docker-local/alpine37
       imageTag: latest
 
   - name: PradnyaOutgoingWebhook
@@ -34,7 +34,7 @@ pipelines:
         configuration:
           dockerFileLocation: .
           dockerFileName: Dockerfile
-          dockerImageName: '34.77.95.84:8082/docker-local/alpine37'  # replace with the image name you want
+          dockerImageName: '34.80.90.69:8082/docker-local/alpine37'  # replace with the image name you want
           dockerImageTag: "{{gitBranch}}-${run_number}"
           inputResources:
             - name: gitrepo_outgoingwebhook
@@ -59,7 +59,7 @@ pipelines:
           onSuccess:
             #- set_payload PradnyaOutgoingWebhook "{\"imageName\":\"$res_MagentoImage_imageName\", \"imageTag\":\"$res_MagentoImage_imageTag\"}"
             #- set_payload PradnyaOutgoingWebhook "{\"imageName\":\"MagentoImageName\", \"imageTag\":\"MagentoImageTag\"}"
-            - echo "{\"imageName\":\"34.77.80.80:8082/docker-local/alpine37\",\"imageTag\":\"{{gitBranch}}-${run_number}\"}" > $PradnyaOutgoingWebhook_payload_file
+            - echo "{\"imageName\":\"34.80.90.69:8082/docker-local/alpine37\",\"imageTag\":\"{{gitBranch}}-${run_number}\"}" > $PradnyaOutgoingWebhook_payload_file
             - set_payload PradnyaOutgoingWebhook $PradnyaOutgoingWebhook_payload_file --file
 
             
